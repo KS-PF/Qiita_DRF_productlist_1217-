@@ -1,0 +1,65 @@
+[
+    {
+        "id": 4,
+        "name": "デジタルビジョンプロM49",
+        "producttype": "カメラ",
+        "description": "高解像度で手軽に美しい動画を撮影できるビデオカメラ",
+        "price": 80000,
+        "review": 5,
+        "manufacturer": "桜産業株式会社"
+    },
+    {
+        "id": 1,
+        "name": "プロビューカメラX1",
+        "producttype": "カメラ",
+        "description": "商品概要説明: 高解像度でクリアな映像を提供するプロ仕様のビデオカメラ。",
+        "price": 50000,
+        "review": 4,
+        "manufacturer": "睦電機株式会社"
+    },
+    {
+        "id": 2,
+        "name": "プロビューカメラX2",
+        "producttype": "カメラ",
+        "description": "高解像度で手軽に美しい動画を撮影できるビデオカメラ",
+        "price": 30000,
+        "review": 4,
+        "manufacturer": "睦電機株式会社"
+    },
+    {
+        "id": 6,
+        "name": "ウルトラビジョンマスターZ900",
+        "producttype": "テレビ",
+        "description": "フレームレスデザインとHDR対応の大画面液晶テレビ。",
+        "price": 95000,
+        "review": 4,
+        "manufacturer": "睦電機株式会社"
+    },
+    {
+        "id": 3,
+        "name": "デジタルビジョンプロM4",
+        "producttype": "カメラ",
+        "description": "専門家向けに設計され、多機能で使いやすいデジタルビデオカメラ。",
+        "price": 75000,
+        "review": 3,
+        "manufacturer": "桜産業株式会社"
+    },
+    {
+        "id": 5,
+        "name": "ビジョンプロエリートX5000",
+        "producttype": "テレビ",
+        "description": "高解像度4K画面と先進の音声認識技術を搭載した最先端のテレビ",
+        "price": 120000,
+        "review": 3,
+        "manufacturer": "蓮工房有限会社"
+    },
+    {
+        "id": 7,
+        "name": "プレミアムワイヤレスヘッドフォン",
+        "producttype": "ヘッドフォン",
+        "description": "商品概要: 高音質でノイズキャンセリング対応のワイヤレスヘッドフォン",
+        "price": 4500,
+        "review": 2,
+        "manufacturer": "睦電機株式会社"
+    }
+]

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>PRODUCT LIST API</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-3">PRODUCT LIST API</h1>
+        <div style="height: 16px;"></div>
+        <h2>商品検索</h2>
+        <div class="container">
+            <label for="name">商品名を入力してください:</label>
+            <input class="form-control" type="text" id="name" placeholder="例：プレミアムワイヤレスヘッドフォン"><br>
+            <label for="producttype">商品のタイプを入力してください:</label>
+            <input class="form-control" type="text" id="producttype" placeholder="例：カメラ、テレビ"><br>
+            <label for="manufacturer">製造業者名を入力してください:</label>
+            <input class="form-control" type="text" id="manufacturer" placeholder="例：〇〇工業株式会社"><br>
+            <label for="review">評価(下限)を入力してください:</label>
+            <input class="form-control" type="number" id="review" min="0" max="5" placeholder="1~5の数字を入力してください"><br>
+            <label for="price">値段(上限)を入力してください:</label>
+            <input class="form-control" type="number" id="price" min="0" max="10000" placeholder="例：1000000円"><br>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="button" class="btn btn-outline-primary" onclick="displayText()">検索する</button>
+            </div>
+        </div>
+        <hr>
+        <h3>検索結果一覧　（検索数：<span id="num"></span>）</h3>
+        <div style="height: 16px;"></div>
+        <div id="productslistContainer"></div>
+    </div>
+    <script>
+        apifetch("あなたのURLを入れてください/?format=json")
+        function apifetch(ogapiurl) {
+            clearproductslistContainer()
+            apiurl = ogapiurl;
+            fetch(apiurl)
+                .then(response => response.json())
+                .then(data => {
+                    displayProductslistData(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching Productslist data:', error);
+                });
+        }
+        function displayProductslistData(productslistData) {
+            var num=0;
+            productslistData.forEach(productslist => {
+                num+=1;
+                var productslistElement = null
+                productslistElement = document.createElement('div');
+                productslistElement.innerHTML = `
+                <div class="container">
+                <table class="table table-borderless">
+                    <tr>
+                        <td colspan="2"><p class="fw-light">商品名</p></td>
+                        <td colspan="2"><p class="fs-3">${productslist.name}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p class="fw-light">レビュー</p></td>
+                        <td colspan="2"><p class="fs-5">${productslist.review}/5</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p class="fw-light">価格</p></td>
+                        <td colspan="2"><p class="fs-5">${productslist.price}円</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p class="fw-light">商品概要</p></td>
+                        <td colspan="2"><p class="fs-5">${productslist.description}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p class="fw-light">商品タイプ</p></td>
+                        <td colspan="2"><p class="fs-5">${productslist.producttype}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p class="fw-light">製造業者</p></td>
+                        <td colspan="2"><p class="fs-5">${productslist.manufacturer}</p></td>
+                    </tr>
+                </table>
+                <hr>
+                </div>
+                `;
+                document.getElementById('productslistContainer').appendChild(productslistElement);
+            });
+            document.getElementById("num").innerHTML = String(num);
+        }
+        function addQueryParam(parameter, apiUrl) {
+            var inputValue = document.getElementById(parameter).value;
+            if (inputValue !== "") {
+                apiUrl += "&" + parameter + "=" + inputValue;
+            }
+            return apiUrl;
+        }
+        function addIntQueryParam(parameter, apiUrl) {
+            var inputValue = document.getElementById(parameter).value;
+            if (inputValue != "") {
+                inputValue = Math.round(Number(inputValue));
+                if (!isNaN(inputValue)) {
+                    inputValue = String(inputValue)
+                    apiUrl += "&" + parameter + "=" + inputValue
+                }
+            }
+            return apiUrl;
+        }
+        function displayText() {
+            let ogapiurl = "あなたのURLを入れてください/?format=json";
+            ogapiurl = addQueryParam("name", ogapiurl);
+            ogapiurl = addQueryParam("producttype", ogapiurl);
+            ogapiurl = addQueryParam("manufacturer", ogapiurl);
+            ogapiurl = addIntQueryParam("review", ogapiurl);
+            ogapiurl = addIntQueryParam("price", ogapiurl);
+            apifetch(ogapiurl)
+        }
+        function clearproductslistContainer() {
+            var productslistContainer = document.getElementById('productslistContainer');
+            while (productslistContainer.firstChild) {
+                productslistContainer.removeChild(productslistContainer.firstChild);
+            }
+        }
+    </script>
+</body>
+</html>
